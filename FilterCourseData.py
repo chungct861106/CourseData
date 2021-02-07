@@ -15,7 +15,7 @@ with open("Department.json", encoding='utf-8') as f:
 fullname = list(depart.keys())
 data = data.dropna(subset=['COUDPTN'])
 data = data.loc[data["CREDIT"]>=2]
-data = data.loc[data["S_TERM"]==2]
+data = data.loc[data["S_TERM"]==1]
 
 
 #%%
@@ -62,4 +62,4 @@ df = df.loc[mask]
 
 #%%
 
-df.to_csv("NewCourseData-2.csv")
+df.to_csv("NewCourseData-1.csv")
