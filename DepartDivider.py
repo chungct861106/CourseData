@@ -6,7 +6,7 @@ import sys
 import os
 import matplotlib.font_manager as fm
 
-data = pd.read_csv("NewCourseData-1.csv", encoding="utf-8", index_col=0)
+data = pd.read_csv("NewCourseData-2.csv", encoding="utf-8", index_col=0)
 #%%
 #  ['COUDPTN', 'COUCAT', 'DPT_SCNAME', 'STDCAT', 'CREDIT', 'COU_CNAME', 'GRADE', 'SCORE_GP', 'S_YEAR']
 
@@ -113,4 +113,4 @@ for sheet in sheets:
 #%%
 
 for fig in figures:
-    figures[fig].savefig(fig+"-上學期.png")
+    figures[fig].savefig(fig+"-下學期.png")
