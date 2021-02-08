@@ -1,8 +1,15 @@
 import pandas as pd
+import matplotlib
+import matplotlib.pyplot as plt
+import numpy as np
+import sys
+import os
+import matplotlib.font_manager as fm
 
 data = pd.read_csv("NewCourseData-2.csv", encoding="utf-8", index_col=0)
 #%%
 #  ['COUDPTN', 'COUCAT', 'DPT_SCNAME', 'STDCAT', 'CREDIT', 'COU_CNAME', 'GRADE', 'SCORE_GP', 'S_YEAR']
+
 
 Years = data["S_YEAR"].unique().tolist()
 CollegeKind = sorted(data["COUCAT"].unique().tolist())
@@ -11,8 +18,9 @@ sheets = dict()
 for college in CollegeKind:
     cdata = data.loc[data["COUCAT"] == college]
     CourseKind = sorted(cdata["COUDPTN"].unique().tolist())
-    # StudentKind = sorted(cdata["DPT_SCNAME"].unique().tolist())
-    
+    CourseKind = [name for name in CourseKind if name[-1] == "系"]
+
+
     
     
     #%%
@@ -56,8 +64,52 @@ for college in CollegeKind:
 
 #%%
 
+def getfig(df, title):
+    fpath = 'TaipeiSansTCBeta-Bold.ttf'
+    prop = fm.FontProperties(fname=fpath)
+    labels = df.columns.tolist()
+    if len(labels) == 0:
+        return None
+    pos = np.arange(len(labels))
+    labelsdatas = df.values.tolist()
+    fig, ax = plt.subplots()
+    width = 0.5
+    for i in range(len(df)):
+        ax.bar(pos - width/2 + i * width/(len(df.index)-1), labelsdatas[i], width/(len(df.index)-1), label=df.index[i])
+    ax.set_title(title, fontproperties=prop)
+    ax.set_xticks(pos)
+    ax.set_xticklabels(labels, fontproperties=prop)
+    ax.legend(ncol=len(labelsdatas), bbox_to_anchor=(0, -0.2),
+                  loc='lower left', fontsize='small')
+    fig.tight_layout()
+    return fig
+
+figures = dict()
 for sheet in sheets:
-    with pd.ExcelWriter(sheet+'-下學期.xlsx') as writer:
+    with pd.ExcelWriter(sheet+'-下學期.xlsx', engine='xlsxwriter') as writer:
+        workbook = writer.book
         for name in sheets[sheet]:
-            sheets[sheet][name].sort_index().to_excel(writer, sheet_name=name)
-    
+            df = sheets[sheet][name]
+            figures[sheet+"-"+name] = getfig(df, name)
+            df.sort_index().to_excel(writer, sheet_name=name)
+            worksheet = writer.sheets[name]
+            chart = workbook.add_chart({'type': 'column'})
+
+            # Configure the series of the chart from the dataframe data.
+            for row_num in range(1, len(Years) + 1):
+                chart.add_series({
+                    'name':       [name, row_num, 0],
+                    'categories': [name, 0, 1, 0, len(df.columns)],
+                    'values':     [name, row_num, 1, row_num ,len(df.columns)],
+                    'gap':        300,
+                })
+            chart.set_title({'name': sheet + name[0:4]})
+            chart.set_y_axis({'major_gridlines': {'visible': False}})
+            worksheet.insert_chart('A11', chart)
+        writer.save()
+
+
+#%%
+
+for fig in figures:
+    figures[fig].savefig(fig+"-下學期.png")
