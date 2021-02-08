@@ -6,7 +6,7 @@ import sys
 import os
 import matplotlib.font_manager as fm
 
-data = pd.read_csv("NewCourseData-2.csv", encoding="utf-8", index_col=0)
+data = pd.read_csv("NewCourseData-1.csv", encoding="utf-8", index_col=0)
 #%%
 #  ['COUDPTN', 'COUCAT', 'DPT_SCNAME', 'STDCAT', 'CREDIT', 'COU_CNAME', 'GRADE', 'SCORE_GP', 'S_YEAR']
 
@@ -65,6 +65,7 @@ for college in CollegeKind:
 #%%
 
 def getfig(df, title):
+    df = df.sort_index()
     fpath = 'TaipeiSansTCBeta-Bold.ttf'
     prop = fm.FontProperties(fname=fpath)
     labels = df.columns.tolist()
@@ -86,7 +87,7 @@ def getfig(df, title):
 
 figures = dict()
 for sheet in sheets:
-    with pd.ExcelWriter(sheet+'-下學期.xlsx', engine='xlsxwriter') as writer:
+    with pd.ExcelWriter(sheet+'-學期.xlsx', engine='xlsxwriter') as writer:
         workbook = writer.book
         for name in sheets[sheet]:
             df = sheets[sheet][name]
@@ -112,4 +113,4 @@ for sheet in sheets:
 #%%
 
 for fig in figures:
-    figures[fig].savefig(fig+"-下學期.png")
+    figures[fig].savefig(fig+"-上學期.png")
