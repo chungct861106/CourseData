@@ -7,10 +7,6 @@ import os
 import matplotlib.font_manager as fm
 
 data = pd.read_csv("NewCourseData-2.csv", encoding="utf-8", index_col=0)
-
-#%%
-
-test = data.head()
 #%%
 
 StudentCat = data["STDCAT"].unique()
@@ -27,6 +23,12 @@ for cat in StudentCat:
     cat_df[cat] = pd.DataFrame(outputdata, index=Years, columns=CourseCat)
 #%%
 
+import sys
+import os
+import matplotlib.font_manager as fm
+import matplotlib
+import matplotlib.pyplot as plt
+import numpy as np
 def getfig(df, title):
     df = df.sort_index()
     fpath = 'TaipeiSansTCBeta-Bold.ttf'
