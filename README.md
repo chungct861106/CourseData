@@ -47,23 +47,23 @@ Github: https://github.com/chungct861106/CourseData
 ### 以系為單位的有趣細項
 - 文學院中以日文系、中文系、外文系以及歷史系為高外系選修比例
     => 外語選修科目以及通識選修科目多
-![](https://i.imgur.com/9oKQZdl.png =600x400)
-![](https://i.imgur.com/KWdBh73.png =600x400)
+![](https://i.imgur.com/9oKQZdl.png)
+![](https://i.imgur.com/KWdBh73.png)
 
 - 工學院中
     - 以機械系以及土木系為外院高選修 (原因不知)
     - 機械系為同院跨系修課最高比例 (原因不知)
 
-![](https://i.imgur.com/lwcskXM.png =600x400)
-![](https://i.imgur.com/2DfvRwa.png =600x400)
+![](https://i.imgur.com/lwcskXM.png)
+![](https://i.imgur.com/2DfvRwa.png)
 
 
 - 電資學院外系人數4年來成長接近兩倍，但外系比例成長沒那麼劇烈
     => 電資學院修課學生增加
 
-![](https://i.imgur.com/4ApED9S.png =600x400)
+![](https://i.imgur.com/4ApED9S.png)
 
-![](https://i.imgur.com/OiwIfRJ.png =600x400)
+![](https://i.imgur.com/OiwIfRJ.png)
 
 ## 選課角度 - 各院/系所學生選擇課程趨勢
 
